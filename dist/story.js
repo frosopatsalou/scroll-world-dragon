@@ -97,7 +97,10 @@
   });
   restart.addEventListener('click',() => { window.scrollTo({top:0,behavior:'instant'}); schedule(); });
   document.querySelectorAll('[data-time]').forEach(button => button.addEventListener('click',() => {
-    window.scrollTo({top:Number(button.dataset.time)/lastTime()*scrollRange(),behavior:'instant'}); schedule();
+    const time = Number(button.dataset.time);
+    // A one-frame offset keeps integer scroll rounding inside the chosen chapter.
+    const chapterTime = time === 0 ? 0 : Math.min(lastTime(),time+1/24);
+    window.scrollTo({top:chapterTime/lastTime()*scrollRange(),behavior:'instant'}); schedule();
   }));
   window.addEventListener('scroll',schedule,{passive:true});
   window.addEventListener('resize',schedule,{passive:true});
