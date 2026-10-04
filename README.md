@@ -12,7 +12,7 @@ Dedicated GitHub repository: https://github.com/frosopatsalou/scroll-world-drago
 
 Public visibility and uploading the project were explicitly approved by Froso. This project is separate from the other assignments and contains genuine website-stage commits. No earlier video-stage commit history has been invented.
 
-One full-screen world. Scroll down to move forward through the film; scroll up to move backward. Four chapter buttons navigate the story. “Journey again” returns to the beginning. Text sits over the artwork with a soft shadow behind it. “Reduce motion” uses four still scenes in the same full-screen stage. Reduced-motion visitors receive this mode automatically and can enable animation. There is no separate reading page.
+One full-screen world. Scroll down to move forward through the film; scroll up to move backward. The story repeats continuously in both directions: its ending returns to the opening without a restart button. Four chapter buttons navigate the story. Text sits over the artwork with a soft shadow behind it. “Reduce motion” uses four still scenes in the same full-screen stage. Reduced-motion visitors receive this mode automatically and can enable animation. There is no separate reading page. The browser tab title is “The Way Home”.
 
 ## Run locally
 
@@ -30,7 +30,9 @@ Open `http://localhost:8765`. No installation or build step is needed. Serve ove
 
 `dist/styles.css` supplies the fixed full-viewport stage, original typography and palette, text overlays and phone layout. The root `index.html` is the public entry; `dist/index.html` mirrors the same experience for the static preview package. Artwork covers the viewport, cropping landscape edges on tall screens. The opening phone crop favors the heroine and horse. Phone address-bar height changes preserve scroll distance. Without JavaScript the opening poster remains visible with an instruction to enable JavaScript.
 
-The video is 1280×720 at 24fps with frequent keyframes. Loading the entire ~20 MB file before scrubbing improves seeking but makes the initial download larger. Reduced-motion visitors do not download the film unless they choose the motion experience.
+The video is 1280×720 at 24fps with frequent keyframes. `journey-loop.mp4` is encoded from the production master at CRF 18 rather than the earlier web copy's CRF 26, retaining more detail. The final 0.75 seconds blend into the opening frame, preserving the 49-second duration and silent soundtrack. No artificial resolution increase is claimed. Canvas rendering uses up to 2× device pixel density. Loading the entire ~46 MB file before scrubbing improves seeking but increases the first download. Reduced-motion visitors do not download the film unless they choose the motion experience.
+
+An invisible three-cycle native scroll buffer is recentered as needed. The logical timeline keeps increasing or decreasing across the seam, and only the displayed video time wraps. This prevents easing through the whole movie backward when a forward loop ends.
 
 ## Process and checks
 

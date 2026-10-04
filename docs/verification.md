@@ -1,5 +1,16 @@
 # Website verification — 4 October 2026
 
+## Quality and continuous-loop revision
+
+- Tab title is exactly “The Way Home”.
+- Higher-quality web copy: 45,750,430 bytes; H.264, 1280×720, 24fps, 49.00 seconds, no audio. Full FFmpeg decode passed.
+- Fidelity against the production master over the first 47 seconds: previous web copy SSIM 0.978688; new CRF 18 copy 0.991738. This measures reduced encoding loss, not additional source resolution.
+- Final 0.75 seconds blend into the exact opening image. No new generation credits used. The production master remains unchanged.
+- Local forward seam crossing: painted video time advanced from 46.208 seconds to 0.208 seconds in the next cycle, with opening text restored.
+- Reverse crossing returned to 47.917 seconds without traversing the middle of the film.
+- Continued forward scrolling recentered the native buffer and advanced into the river-flight chapter; no browser warnings or errors observed.
+- The canvas supports up to 2× device pixel density. Film loading remains a complete-file download, now approximately 46 MB.
+
 ## Full-screen revision
 
 - JavaScript syntax check passed for `dist/scroll-world.js`.

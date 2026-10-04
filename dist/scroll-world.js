@@ -15,14 +15,25 @@
   ];
   const buttons = [...document.querySelectorAll('[data-time]')];
   let motion = !reduced.matches, ready = false, seeking = false, request = 0, current = 0, target = 0;
-  let lastTick = 0, chapter = -1, blobURL, loadingPromise, height = innerHeight, width = 0;
-  const end = () => (film.duration || 49)-1/24;
-  const range = () => Math.max(1,journey.offsetHeight-height);
+  let lastTick = 0, chapter = -1, blobURL, loadingPromise, height = innerHeight, width = 0, turns = 0;
+  const duration = () => film.duration || 49;
+  const end = () => duration()-1/24;
+  const range = () => height*23;
+  const phase = time => ((time % duration())+duration()) % duration();
+  function position() {
+    // Recenter the native scroll buffer without changing the logical timeline.
+    // Easing uses unwrapped time, so crossing the seam never rewinds the film.
+    const span = range();
+    if (scrollY > span*2.5) { turns++; window.scrollTo({top:scrollY-span,behavior:'instant'}); }
+    else if (scrollY < span*.5) { turns--; window.scrollTo({top:scrollY+span,behavior:'instant'}); }
+    return (scrollY/span-1+turns)*duration();
+  }
   function cover(image) {
     const w = image.videoWidth || image.naturalWidth, h = image.videoHeight || image.naturalHeight;
     if (!w || !h) return false;
     const scale = Math.max(canvas.width/w,canvas.height/h);
-    const focus = innerWidth < 650 && current < 4 ? .5+.3*(1-current/4) : .5;
+    const time = image === film ? film.currentTime : phase(current);
+    const focus = innerWidth < 650 ? (time < 4 ? .8-.3*time/4 : time > 45 ? .5+.3*(time-45)/4 : .5) : .5;
     ctx.drawImage(image,(canvas.width-w*scale)*focus,(canvas.height-h*scale)/2,w*scale,h*scale);
     return true;
   }
@@ -34,14 +45,19 @@
   function schedule() { if (!request) request = requestAnimationFrame(tick); }
   function size() {
     // Keep scroll distance stable when the phone's address bar changes height.
-    if (innerWidth !== width) { width = innerWidth; height = innerHeight; journey.style.height = `${height*24}px`; }
-    const dpr = Math.min(devicePixelRatio || 1,1.5);
+    if (innerWidth !== width) {
+      const relative = width ? scrollY/range() : 1;
+      width = innerWidth; height = innerHeight; journey.style.height = `${height*70}px`;
+      window.scrollTo({top:relative*range(),behavior:'instant'});
+    }
+    const dpr = Math.min(devicePixelRatio || 1,2);
     canvas.width = Math.round(innerWidth*dpr); canvas.height = Math.round(innerHeight*dpr);
     if (motion && ready) paint(); else cover(poster);
     schedule();
   }
   function showCopy(time) {
-    const index = chapters.reduce((c,item,i) => time >= item.time ? i : c,0);
+    const copyTime = time >= 48 ? 0 : time;
+    const index = chapters.reduce((c,item,i) => copyTime >= item.time ? i : c,0);
     if (index !== chapter) {
       chapter = index; const c = chapters[index];
       $('#eyebrow').textContent = `0${index+1} / ${c.name}`;
@@ -52,22 +68,24 @@
     }
     $('#progress-bar').style.width = `${time/end()*100}%`;
     $('#progress-label').textContent = `${String(Math.round(time/end()*100)).padStart(2,'0')} / 100`;
-    $('#scroll-cue').hidden = time > 2; $('#restart').hidden = time < 46;
+    $('#scroll-cue').hidden = time > 2; $('#restart').hidden = true;
     const visible = !motion || time < 5 || (time >= 12 && time < 15) || (time >= 20 && time < 23) || time >= 44;
-    $('#story-copy').style.opacity = visible ? 1 : 0;
+    const seamOpacity = time >= 48 ? time-48 : time >= 47 ? 48-time : 1;
+    $('#story-copy').style.opacity = visible ? seamOpacity : 0;
     $('#story-copy').style.pointerEvents = visible ? 'auto' : 'none';
   }
   function tick(now) {
-    request = 0; target = Math.min(1,Math.max(0,scrollY/range()))*end();
+    request = 0; target = position();
     const dt = lastTick ? Math.min((now-lastTick)/1000,.05) : 1/60; lastTick = now;
     current = motion ? current+(target-current)*(1-Math.exp(-dt/.16)) : target;
     if (Math.abs(target-current) < .003) current = target;
-    showCopy(current);
+    const localTime = phase(current);
+    showCopy(localTime);
     if (motion && ready && !seeking) {
-      const time = Math.min(end(),Math.round(current*24)/24);
+      const time = Math.min(end(),Math.round(localTime*24)/24);
       if (Math.abs(film.currentTime-time) > 1/48) { seeking = true; film.currentTime = time; }
     }
-    if (Math.abs(target-current) > .003 || (motion && ready && Math.abs(film.currentTime-current) > 1/24)) schedule();
+    if (Math.abs(target-current) > .003 || (motion && ready && Math.abs(film.currentTime-localTime) > 1/24)) schedule();
   }
   film.addEventListener('seeked',() => { paint(); seeking = false; schedule(); });
   film.addEventListener('loadeddata',() => { ready = true; $('#loading').hidden = true; paint(); schedule(); });
@@ -77,7 +95,7 @@
     $('#loading').hidden = false;
     loadingPromise = (async () => {
       try {
-        const response = await fetch(asset('journey.mp4')); if (!response.ok) throw new Error('Film unavailable');
+        const response = await fetch(asset('journey-loop.mp4')); if (!response.ok) throw new Error('Film unavailable');
         const total = Number(response.headers.get('content-length')); let blob;
         if (response.body && total) {
           const reader = response.body.getReader(), chunks = []; let loaded = 0;
@@ -105,7 +123,8 @@
     schedule();
   }
   function jump(time) {
-    window.scrollTo({top:(time ? Math.min(end(),time+.05) : 0)/end()*range(),behavior:'instant'}); schedule();
+    turns = 0; current = time; lastTick = 0;
+    window.scrollTo({top:range()*(1+time/duration()),behavior:'instant'}); schedule();
   }
   buttons.forEach(button => button.addEventListener('click',() => jump(Number(button.dataset.time))));
   $('#restart').addEventListener('click',() => jump(0));
@@ -113,10 +132,12 @@
   $('#mode-toggle').addEventListener('click',() => setMotion(!motion));
   reduced.addEventListener('change',event => setMotion(!event.matches));
   // Prime a paused, muted video on the first touch for iOS Safari.
-  addEventListener('pointerdown',() => {
+  function primeTouchVideo() {
     if (!motion || !ready || !matchMedia('(pointer: coarse)').matches) return;
+    removeEventListener('pointerdown',primeTouchVideo);
     const time = film.currentTime; film.play().then(() => { film.pause(); film.currentTime = time; }).catch(() => {});
-  },{once:true});
+  }
+  addEventListener('pointerdown',primeTouchVideo);
   addEventListener('scroll',schedule,{passive:true}); addEventListener('resize',size,{passive:true});
   addEventListener('pagehide',event => { if (!event.persisted && blobURL) URL.revokeObjectURL(blobURL); });
   size(); setMotion(motion);
