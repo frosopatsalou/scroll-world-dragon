@@ -11,4 +11,6 @@
 - All text is HTML outside the video. Video is muted and contains no audio track.
 - Visual inspection: desktop opening and phone layout reviewed; no page-level blank stage. Existing accepted video limitations remain in the approved media.
 
-Still outstanding: a physical phone test (including Safari), slower-network testing and independently confirming access to the eventual live URL from the teacher's account. Hosted deployment status will be checked separately. Dedicated GitHub repository creation/push remains a separate submission requirement.
+Hosted deployment succeeded on 4 October 2026 at https://the-way-home-dragon.thomas-more-0656.chatgpt.site. The ~20 MB web copy fits the host's individual-asset limit. The hosting preview currently has owner-only access.
+
+Still outstanding: a physical phone test (including Safari), slower-network testing and teacher/public access to the live URL. Dedicated GitHub repository creation/push is awaiting the user's visibility approval and remains a submission requirement.
