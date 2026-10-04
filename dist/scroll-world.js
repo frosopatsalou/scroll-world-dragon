@@ -50,7 +50,7 @@
       width = innerWidth; height = innerHeight; journey.style.height = `${height*70}px`;
       window.scrollTo({top:relative*range(),behavior:'instant'});
     }
-    const dpr = Math.min(devicePixelRatio || 1,2);
+    const dpr = devicePixelRatio || 1;
     canvas.width = Math.round(innerWidth*dpr); canvas.height = Math.round(innerHeight*dpr);
     if (motion && ready) paint(); else cover(poster);
     schedule();
@@ -89,23 +89,40 @@
   }
   film.addEventListener('seeked',() => { paint(); seeking = false; schedule(); });
   film.addEventListener('loadeddata',() => { ready = true; $('#loading').hidden = true; paint(); schedule(); });
+  film.addEventListener('error',() => {
+    ready = false; loadingPromise = undefined; setMotion(false);
+    $('#loading').hidden = false;
+    $('#loading-text').textContent = 'This browser could not decode the 4K film. Please try a browser with 4K H.264 support.';
+  });
   poster.addEventListener('load',() => { if (!ready || !motion) cover(poster); });
   async function loadFilm() {
     if (loadingPromise) return loadingPromise;
     $('#loading').hidden = false;
     loadingPromise = (async () => {
       try {
-        const response = await fetch(asset('journey-loop.mp4')); if (!response.ok) throw new Error('Film unavailable');
-        const total = Number(response.headers.get('content-length')); let blob;
-        if (response.body && total) {
-          const reader = response.body.getReader(), chunks = []; let loaded = 0;
-          while (true) {
-            const {done,value} = await reader.read(); if (done) break;
+        const manifestResponse = await fetch(asset('journey-4k.json'));
+        if (!manifestResponse.ok) throw new Error('Film manifest unavailable');
+        const manifest = await manifestResponse.json();
+        const chunks = []; let loaded = 0;
+        // Ordered byte parts reconstruct one complete MP4. Every visitor gets
+        // this same 4K encode; there is no adaptive resolution selection.
+        for (const part of manifest.parts) {
+          const response = await fetch(asset(part.file));
+          if (!response.ok) throw new Error('Film part unavailable');
+          if (response.body) {
+            const reader = response.body.getReader();
+            while (true) {
+              const {done,value} = await reader.read(); if (done) break;
+              chunks.push(value); loaded += value.length;
+              $('#loading-text').textContent = `Preparing your 4K journey… ${Math.min(100,Math.round(loaded/manifest.bytes*100))}%`;
+            }
+          } else {
+            const value = new Uint8Array(await response.arrayBuffer());
             chunks.push(value); loaded += value.length;
-            $('#loading-text').textContent = `Preparing your journey… ${Math.min(100,Math.round(loaded/total*100))}%`;
           }
-          blob = new Blob(chunks,{type:'video/mp4'});
-        } else blob = await response.blob();
+        }
+        if (loaded !== manifest.bytes) throw new Error('Film download incomplete');
+        const blob = new Blob(chunks,{type:'video/mp4'});
         blobURL = URL.createObjectURL(blob); film.src = blobURL; film.load();
       } catch (error) {
         loadingPromise = undefined; setMotion(false);

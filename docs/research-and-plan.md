@@ -59,6 +59,8 @@ The assignment's [Scroll World skill](https://github.com/oso95/scroll-world/blob
 
 ## Production evidence
 
+Final quality revision: Froso requested always using the highest-quality version even with a longer wait. A fixed 3840×2160, 24fps, CRF 16 H.264 version is now served to every motion-enabled visitor. It is a Lanczos upscale from the original 720p master, not native 4K generation. The 257 MB MP4 is distributed as sixteen ordered byte parts and reconstructed unchanged before decoding. The existing seamless ending is retained; no adaptive-quality selection is used.
+
 Later website revision: Froso requested higher quality and continuous looping. The public GitHub Pages media was re-encoded from the approved master at CRF 18 (approximately 46 MB), retaining the native 1280×720 resolution. The final 0.75 seconds blend into the opening frame. The scroll engine uses an unwrapped logical timeline and a recentered native scroll buffer, so easing remains continuous through forward and reverse loop boundaries. The public deployment does not use the private preview's earlier 25 MiB asset constraint. The original production master is unchanged.
 
 Magnific MCP generated the images and Seedance 2.5 clips. Actual video boundary frames were extracted for the connectors. A complete scene A → connector → scene B test was reviewed before generating the remaining clips. Final timing revisions shortened the first flight, lengthened the fight, made the villain recoil and extended the escape flight. The accepted master is `Dragon-49s-silent-revision-03.mp4`; its production logs remain in the parent workspace's `outputs/dragon` folder.

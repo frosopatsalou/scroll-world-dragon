@@ -1,0 +1,82 @@
+{
+  "width": 3840,
+  "height": 2160,
+  "fps": 24,
+  "duration": 49,
+  "sourceResolution": [
+    1280,
+    720
+  ],
+  "upscale": "Lanczos",
+  "codec": "H.264",
+  "crf": 16,
+  "audio": false,
+  "bytes": 257487255,
+  "sha256": "e4acf85e75be6f89c7d2f861c7391fc73db7702e6d5056f0a5f48f6806970d02",
+  "parts": [
+    {
+      "file": "journey-4k-000.bin",
+      "bytes": 16777216
+    },
+    {
+      "file": "journey-4k-001.bin",
+      "bytes": 16777216
+    },
+    {
+      "file": "journey-4k-002.bin",
+      "bytes": 16777216
+    },
+    {
+      "file": "journey-4k-003.bin",
+      "bytes": 16777216
+    },
+    {
+      "file": "journey-4k-004.bin",
+      "bytes": 16777216
+    },
+    {
+      "file": "journey-4k-005.bin",
+      "bytes": 16777216
+    },
+    {
+      "file": "journey-4k-006.bin",
+      "bytes": 16777216
+    },
+    {
+      "file": "journey-4k-007.bin",
+      "bytes": 16777216
+    },
+    {
+      "file": "journey-4k-008.bin",
+      "bytes": 16777216
+    },
+    {
+      "file": "journey-4k-009.bin",
+      "bytes": 16777216
+    },
+    {
+      "file": "journey-4k-010.bin",
+      "bytes": 16777216
+    },
+    {
+      "file": "journey-4k-011.bin",
+      "bytes": 16777216
+    },
+    {
+      "file": "journey-4k-012.bin",
+      "bytes": 16777216
+    },
+    {
+      "file": "journey-4k-013.bin",
+      "bytes": 16777216
+    },
+    {
+      "file": "journey-4k-014.bin",
+      "bytes": 16777216
+    },
+    {
+      "file": "journey-4k-015.bin",
+      "bytes": 5829015
+    }
+  ]
+}

@@ -1,5 +1,16 @@
 # Website verification — 4 October 2026
 
+## Always-4K revision
+
+- One fixed quality for all motion-enabled visitors: H.264, 3840×2160, 24fps, CRF 16, 49.00 seconds, no audio.
+- Encoded directly from the 1280×720 production master using Lanczos upscaling and the existing 0.75-second closing blend. The output is 4K; its underlying source detail is still 720p.
+- Complete FFmpeg decode passed. File size: 257,487,255 bytes.
+- Sixteen ordered byte parts, each at most 16 MiB, reconstruct the exact MP4. Reassembled SHA-256 matches the export. Manifest: `dist/assets/journey-4k.json`.
+- Loader downloads the entire fixed 4K file before enabling scrubbing, with total progress visible. There is no 720p motion fallback or automatic resolution downgrade.
+- Canvas pixel dimensions now follow the device's full pixel density. The source resolution remains fixed at 4K regardless of viewport size.
+- Local browser: video metadata reports 3840×2160, 49 seconds, readyState 4; scrolling advanced the painted frame to 1.500 seconds. Chapter navigation and loop-boundary scrolling were exercised.
+- The large download and decoding footprint are deliberate per Froso's request. Physical phones and Safari still require a real-device check.
+
 ## Quality and continuous-loop revision
 
 - Tab title is exactly “The Way Home”.
