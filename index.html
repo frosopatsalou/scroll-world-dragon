@@ -1,2 +1,48 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0;url=dist/"><title>The Way Home</title></head><body style="background:#111c1b;color:#f4eddc;font-family:Georgia,serif;padding:10vw"><h1>The Way Home</h1><p><a style="color:inherit" href="dist/">Enter the illustrated fantasy journey →</a></p></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#111c1b">
+  <meta name="description" content="An illustrated fantasy journey by Froso Patsalou. Follow a rider, a silver dragon and the courage to find a way home.">
+  <title>The Way Home — a scroll story by Froso Patsalou</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23111c1b'/%3E%3Cpath d='M5 22L16 6l11 16-11-5z' fill='%23e4ce9e'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="dist/styles.css?v=3">
+  <script src="dist/scroll-world.js?v=3" defer></script>
+</head>
+<body>
+  <header class="masthead">
+    <a class="wordmark" href="#" aria-label="The Way Home, beginning">THE WAY HOME<span>A SCROLL STORY</span></a>
+    <button id="mode-toggle" type="button" aria-pressed="true">Reduce motion</button>
+  </header>
+  <main>
+    <div id="journey" aria-label="Scroll to travel through the dragon's journey">
+      <div class="stage">
+        <img id="poster" src="dist/assets/meadow.jpg" alt="" aria-hidden="true"><canvas id="world" aria-hidden="true"></canvas><video id="film" muted playsinline preload="none" aria-hidden="true"></video>
+        <div class="shade" aria-hidden="true"></div>
+        <div id="loading" role="status"><span class="loading-dot"></span><span id="loading-text">Preparing your journey…</span></div>
+        <div class="story-copy" id="story-copy">
+          <p class="eyebrow" id="eyebrow">01 / THE MEADOW</p>
+          <h1 id="headline">The way<br><em>home.</em></h1>
+          <p id="caption">A rider. A dragon. A bond that brings her back.</p>
+          <button class="ending-cta" id="restart" hidden type="button">Journey again <span aria-hidden="true">↗</span></button>
+        </div>
+        <p class="scroll-cue" id="scroll-cue">SCROLL TO BEGIN <span aria-hidden="true">↓</span></p>
+        <footer class="journey-footer">
+          <span class="author">A WORLD BY FROSO PATSALOU</span>
+          <span id="chapter-name">THE MEADOW</span>
+          <span id="progress-label">00 / 100</span>
+        </footer>
+        <div class="progress-track" aria-hidden="true"><div id="progress-bar"></div></div>
+        <nav class="chapter-nav" aria-label="Journey chapters">
+          <button data-time="0" aria-label="Chapter 1: The meadow" aria-current="step"><span>01</span></button>
+          <button data-time="12" aria-label="Chapter 2: Above the river"><span>02</span></button>
+          <button data-time="20" aria-label="Chapter 3: Into the shadow"><span>03</span></button>
+          <button data-time="39" aria-label="Chapter 4: The way home"><span>04</span></button>
+        </nav>
+      </div>
+    </div>
+  </main>
+  <noscript><p class="no-script">Enable JavaScript to explore the scroll story.</p></noscript>
+</body>
+</html>

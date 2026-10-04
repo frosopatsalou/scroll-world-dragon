@@ -33,7 +33,7 @@ The observations above distinguish direct inspection from inferred design choice
 
 ## Technical plan and final timing
 
-Plain HTML, CSS and JavaScript with no framework dependency. A sticky stage maps normalized scroll position to the 49-second film. Forward scrolling increases time; backward scrolling decreases it. Requests are coalesced while a seek is in progress; the latest scroll position is applied after `seeked`. The film stays paused and silent.
+Plain HTML, CSS and JavaScript with no framework dependency. A fixed full-viewport stage maps normalized scroll position to the 49-second film. Forward scrolling increases time; backward scrolling decreases it. A continuous animation loop eases timeline changes in both directions. Requests are coalesced while a seek is in progress; a canvas holds the last decoded frame until `seeked` delivers the next. The film stays paused and silent.
 
 | Segment | Timeline |
 | --- | --- |
@@ -47,7 +47,15 @@ Plain HTML, CSS and JavaScript with no framework dependency. A sticky stage maps
 
 Video target: H.264, 1280×720, 24fps, 49 seconds, no audio track. Web encoding uses a keyframe every six frames and fast-start MP4 metadata to improve seeking. The complete ~20 MB film loads to a local browser blob before scrubbing; a poster and percentage indicator remain available during loading. This trades initial download time and memory for stable forward/backward seeks. The web copy uses CRF 26 to fit the host's 25 MiB individual-asset limit; the approved production master remains available separately.
 
-The landscape is contained, not cropped, on phones. No additional portrait generation was commissioned. A still-image story loads by default when `prefers-reduced-motion` is enabled and when JavaScript is unavailable. A visible control lets visitors switch modes. A loading error leaves the poster and an instruction to use the still story. The ending offers “Journey again”.
+The landscape covers the entire viewport, cropping edges on phones. No additional portrait generation was commissioned. The opening phone crop favors the heroine and horse. Reduced-motion visitors use still images in the same full-screen stage, with a control to enable animation. A loading error preserves that still experience. Without JavaScript the opening poster remains visible. The ending offers “Journey again”.
+
+## Full-screen revision — 4 October 2026
+
+Froso requested one immersive page, smoother scrolling in both directions and text over the film with a faint shadow. The separate reading layout was removed. The scroll distance was extended to give smaller timeline changes per wheel movement.
+
+The user-supplied [Whiteout reference](https://whiteout.overvac.com/) was reviewed in a browser: full-viewport scenery, sparse fixed controls, text over the scene and camera movement driven by scrolling. These informed the presentation; the dragon story, artwork, palette and typography remain this project's own.
+
+The assignment's [Scroll World skill](https://github.com/oso95/scroll-world/blob/main/skills/scroll-world/SKILL.md) and scrub engine were read. The custom engine adapts its continuous animation loop, smoothed tracking, coalesced seeks, full-file blob loading, first-touch video priming and stable mobile scroll-distance approach. Existing six-frame GOP media was retained; no additional generations or visual quality reduction were needed for this revision.
 
 ## Production evidence
 

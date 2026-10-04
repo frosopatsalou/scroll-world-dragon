@@ -8,18 +8,17 @@
   <title>The Way Home — a scroll story by Froso Patsalou</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23111c1b'/%3E%3Cpath d='M5 22L16 6l11 16-11-5z' fill='%23e4ce9e'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
-  <script src="story.js?v=2" defer></script>
+  <script src="scroll-world.js?v=3" defer></script>
 </head>
-<body class="still-mode">
-  <a class="skip-link" href="#still-story">Read the story</a>
+<body>
   <header class="masthead">
     <a class="wordmark" href="#" aria-label="The Way Home, beginning">THE WAY HOME<span>A SCROLL STORY</span></a>
-    <button id="mode-toggle" type="button" aria-pressed="true">Read without motion</button>
+    <button id="mode-toggle" type="button" aria-pressed="true">Reduce motion</button>
   </header>
   <main>
     <div id="journey" aria-label="Scroll to travel through the dragon's journey">
       <div class="stage">
-        <video id="film" muted playsinline preload="none" poster="assets/meadow.jpg" aria-hidden="true"></video>
+        <img id="poster" src="assets/meadow.jpg" alt="" aria-hidden="true"><canvas id="world" aria-hidden="true"></canvas><video id="film" muted playsinline preload="none" aria-hidden="true"></video>
         <div class="shade" aria-hidden="true"></div>
         <div id="loading" role="status"><span class="loading-dot"></span><span id="loading-text">Preparing your journey…</span></div>
         <div class="story-copy" id="story-copy">
@@ -43,15 +42,7 @@
         </nav>
       </div>
     </div>
-    <article id="still-story" aria-label="The Way Home, still-image story">
-      <section class="still-intro"><p class="eyebrow">AN ILLUSTRATED FANTASY</p><h1>The way <em>home.</em></h1><p>A rider. A dragon. A bond that brings her back.</p><p class="quiet">Scroll to read the journey.</p></section>
-      <section><img src="assets/meadow.jpg" alt="A pink-haired rider and her cream horse cross a green meadow beneath distant mountains." width="1280" height="720"><div><p class="eyebrow">01 / THE MEADOW</p><h2>A quiet beginning.</h2><p>She walks beside her horse, unaware that a silver dragon is about to change her path.</p></div></section>
-      <section><img src="assets/river.jpg" alt="The rider sits on a white dragon as it flies above a green river valley." width="1280" height="720" loading="lazy"><div><p class="eyebrow">02 / ABOVE THE RIVER</p><h2>Trust takes flight.</h2><p>One leap carries her beyond the familiar, over water and toward the mountain.</p></div></section>
-      <section><img src="assets/cave.jpg" alt="The rider faces a hooded swordsman at the entrance to a rocky cave." width="1280" height="720" loading="lazy"><div><p class="eyebrow">03 / INTO THE SHADOW</p><h2>Courage has a limit.</h2><p>A blade brings her to the ground. The dragon returns, and the villain recoils. She takes her chance to escape.</p></div></section>
-      <section><img src="assets/home.jpg" alt="The dragon and rider fly back over the sunlit meadow toward home." width="1280" height="720" loading="lazy"><div><p class="eyebrow">04 / THE WAY HOME</p><h2>Some bonds bring us back.</h2><p>Beyond the cave, the sky opens again. Her horse is waiting where the journey began.</p><a class="text-link" href="#still-story">Read again ↗</a></div></section>
-      <footer class="still-footer">THE WAY HOME · A WORLD BY FROSO PATSALOU</footer>
-    </article>
   </main>
-  <noscript><p class="no-script">You are reading the still-image version. The complete story is available below.</p></noscript>
+  <noscript><p class="no-script">Enable JavaScript to explore the scroll story.</p></noscript>
 </body>
 </html>
