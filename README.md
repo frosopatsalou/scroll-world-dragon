@@ -4,11 +4,15 @@ An illustrated fantasy scroll story by Froso Patsalou for A2 Scroll World.
 
 ## Website
 
-Hosted preview: https://the-way-home-dragon.thomas-more-0656.chatgpt.site
+Public website: https://frosopatsalou.github.io/scroll-world-dragon/ (deployment in progress).
 
-Deployment succeeded on 4 October 2026. This preview currently requires the owner's sign-in; teacher/public access must be enabled before submission.
+Private working preview: https://the-way-home-dragon.thomas-more-0656.chatgpt.site
 
-Dedicated GitHub repository: pending visibility approval and creation/push. Proposed name: `frosopatsalou/scroll-world-dragon`. The local project is prepared separately from the other assignments and contains genuine website-stage commits. No earlier video-stage commit history has been invented.
+The private working preview deployed on 4 October 2026. The public GitHub Pages website is being deployed separately for teacher access.
+
+Dedicated GitHub repository: https://github.com/frosopatsalou/scroll-world-dragon
+
+Public visibility and uploading the project were explicitly approved by Froso. This project is separate from the other assignments and contains genuine website-stage commits. No earlier video-stage commit history has been invented.
 
 Scroll down to move forward through the film; scroll up to move backward. Four chapter buttons navigate the story. “Journey again” returns to the beginning. “Read without motion” switches to an illustrated text version. Reduced-motion visitors receive the still story automatically.
 
