@@ -45,7 +45,7 @@ Plain HTML, CSS and JavaScript with no framework dependency. A sticky stage maps
 | Connector 3: escape and longer flight | 33–39s |
 | Main scene 4: return and reunion | 39–49s |
 
-Video target: H.264, 1280×720, 24fps, 49 seconds, no audio track. Web encoding uses a keyframe every six frames and fast-start MP4 metadata to improve seeking. The complete ~31 MB film loads to a local browser blob before scrubbing; a poster and percentage indicator remain available during loading. This trades initial download time and memory for stable forward/backward seeks.
+Video target: H.264, 1280×720, 24fps, 49 seconds, no audio track. Web encoding uses a keyframe every six frames and fast-start MP4 metadata to improve seeking. The complete ~20 MB film loads to a local browser blob before scrubbing; a poster and percentage indicator remain available during loading. This trades initial download time and memory for stable forward/backward seeks. The web copy uses CRF 26 to fit the host's 25 MiB individual-asset limit; the approved production master remains available separately.
 
 The landscape is contained, not cropped, on phones. No additional portrait generation was commissioned. A still-image story loads by default when `prefers-reduced-motion` is enabled and when JavaScript is unavailable. A visible control lets visitors switch modes. A loading error leaves the poster and an instruction to use the still story. The ending offers “Journey again”.
 

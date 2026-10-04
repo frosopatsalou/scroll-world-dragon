@@ -26,7 +26,7 @@ Open `http://localhost:8765`. No installation or build step is needed. Serve ove
 
 `dist/styles.css` supplies the sticky stage, original typography and palette, text overlays and phone layout. `dist/index.html` holds the story, chapter controls and accessible still-image fallback. The whole landscape remains visible on phones.
 
-The video is 1280×720 at 24fps with frequent keyframes. Loading the entire ~31 MB file before scrubbing improves seeking but makes the initial download larger. Reduced-motion visitors do not download the film unless they choose the motion experience.
+The video is 1280×720 at 24fps with frequent keyframes. Loading the entire ~20 MB file before scrubbing improves seeking but makes the initial download larger. Reduced-motion visitors do not download the film unless they choose the motion experience.
 
 ## Process and checks
 
