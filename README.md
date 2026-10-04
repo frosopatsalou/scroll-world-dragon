@@ -4,11 +4,11 @@ An illustrated fantasy scroll story by Froso Patsalou for A2 Scroll World.
 
 ## Website
 
-Public website: https://frosopatsalou.github.io/scroll-world-dragon/ (deployment in progress).
+Live website: https://frosopatsalou.github.io/scroll-world-dragon/
 
 Private working preview: https://the-way-home-dragon.thomas-more-0656.chatgpt.site
 
-The private working preview deployed on 4 October 2026. The public GitHub Pages website is being deployed separately for teacher access.
+The public GitHub Pages deployment succeeded on 4 October 2026 and can be opened without signing in. The private working preview is a separate owner-only copy.
 
 Dedicated GitHub repository: https://github.com/frosopatsalou/scroll-world-dragon
 

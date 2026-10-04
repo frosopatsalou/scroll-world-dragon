@@ -13,4 +13,6 @@
 
 Hosted deployment succeeded on 4 October 2026 at https://the-way-home-dragon.thomas-more-0656.chatgpt.site. The ~20 MB web copy fits the host's individual-asset limit. The hosting preview currently has owner-only access.
 
-Still outstanding: a physical phone test (including Safari), slower-network testing and teacher/public access to the live URL. Dedicated GitHub repository creation/push is awaiting the user's visibility approval and remains a submission requirement.
+The user explicitly approved public GitHub publication. Dedicated repository: https://github.com/frosopatsalou/scroll-world-dragon. The source, approved media and notes were pushed with their website-stage commit history. GitHub Pages build succeeded, and the public address https://frosopatsalou.github.io/scroll-world-dragon/ was opened without sign-in. The root entry leads to the story in `dist/`.
+
+Still outstanding: a physical phone test (including Safari) and slower-network testing. The research record is honest about the entry-only reviews and its timing after video production.
